@@ -16,7 +16,7 @@ public class KafkaConfig {
 	public String topic;
 	public String[] topics;
 	private String clientID = "client001";
-	private String groupID = "tweet";
+	public String groupID = "twitter-spout";
 	public KafkaConfig(String[] keywords, String host){
 		this.topic = String.join("_", keywords).replaceAll(" ", "-");
 		this.topics = new String[] {topic};
