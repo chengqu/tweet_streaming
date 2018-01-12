@@ -14,6 +14,26 @@
     "name": "timestamp",
     "type": "long",
     "doc": "Unix epoch time in seconds"
-  } ],
+  }, {
+    "name": "entities",
+    "type": {
+    "type": "record",
+    "name": "Entity",
+    "fields": [ {
+      "name" : "hashtags", 
+      "type": {
+        "type" : "array",
+        "items" : {
+          "name": "Hashtag",
+          "type": "record",
+          "fields": [
+            {"name" : "indices", "type" : "int"},
+            {"name" : "text", "type" : "string"}
+          ]
+        }
+      }
+    } ]
+    }
+  }],
   "doc": "A basic schema for storing Twitter messages"
 }

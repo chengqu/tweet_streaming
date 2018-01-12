@@ -14,8 +14,8 @@ import org.apache.avro.message.SchemaStore;
 /** A basic schema for storing Twitter messages */
 @org.apache.avro.specific.AvroGenerated
 public class Tweet extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = -5634289085142731680L;
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Tweet\",\"namespace\":\"tech.chengqu.avro\",\"doc\":\"A basic schema for storing Twitter messages\",\"fields\":[{\"name\":\"username\",\"type\":\"string\",\"doc\":\"Name of the user account on Twitter.com\"},{\"name\":\"text\",\"type\":\"string\",\"doc\":\"The content of the user's Twitter message\"},{\"name\":\"timestamp\",\"type\":\"long\",\"doc\":\"Unix epoch time in seconds\"}]}");
+  private static final long serialVersionUID = 4742627905634449395L;
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Tweet\",\"namespace\":\"tech.chengqu.avro\",\"doc\":\"A basic schema for storing Twitter messages\",\"fields\":[{\"name\":\"username\",\"type\":\"string\",\"doc\":\"Name of the user account on Twitter.com\"},{\"name\":\"text\",\"type\":\"string\",\"doc\":\"The content of the user's Twitter message\"},{\"name\":\"timestamp\",\"type\":\"long\",\"doc\":\"Unix epoch time in seconds\"},{\"name\":\"entities\",\"type\":{\"type\":\"record\",\"name\":\"Entity\",\"fields\":[{\"name\":\"hashtags\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"Hashtag\",\"fields\":[{\"name\":\"indices\",\"type\":\"int\"},{\"name\":\"text\",\"type\":\"string\"}]}}}]}}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static SpecificData MODEL$ = new SpecificData();
@@ -58,6 +58,7 @@ public class Tweet extends org.apache.avro.specific.SpecificRecordBase implement
   @Deprecated public java.lang.CharSequence text;
   /** Unix epoch time in seconds */
   @Deprecated public long timestamp;
+  @Deprecated public tech.chengqu.avro.Entity entities;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -71,11 +72,13 @@ public class Tweet extends org.apache.avro.specific.SpecificRecordBase implement
    * @param username Name of the user account on Twitter.com
    * @param text The content of the user's Twitter message
    * @param timestamp Unix epoch time in seconds
+   * @param entities The new value for entities
    */
-  public Tweet(java.lang.CharSequence username, java.lang.CharSequence text, java.lang.Long timestamp) {
+  public Tweet(java.lang.CharSequence username, java.lang.CharSequence text, java.lang.Long timestamp, tech.chengqu.avro.Entity entities) {
     this.username = username;
     this.text = text;
     this.timestamp = timestamp;
+    this.entities = entities;
   }
 
   public org.apache.avro.Schema getSchema() { return SCHEMA$; }
@@ -85,6 +88,7 @@ public class Tweet extends org.apache.avro.specific.SpecificRecordBase implement
     case 0: return username;
     case 1: return text;
     case 2: return timestamp;
+    case 3: return entities;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -96,6 +100,7 @@ public class Tweet extends org.apache.avro.specific.SpecificRecordBase implement
     case 0: username = (java.lang.CharSequence)value$; break;
     case 1: text = (java.lang.CharSequence)value$; break;
     case 2: timestamp = (java.lang.Long)value$; break;
+    case 3: entities = (tech.chengqu.avro.Entity)value$; break;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -152,6 +157,22 @@ public class Tweet extends org.apache.avro.specific.SpecificRecordBase implement
   }
 
   /**
+   * Gets the value of the 'entities' field.
+   * @return The value of the 'entities' field.
+   */
+  public tech.chengqu.avro.Entity getEntities() {
+    return entities;
+  }
+
+  /**
+   * Sets the value of the 'entities' field.
+   * @param value the value to set.
+   */
+  public void setEntities(tech.chengqu.avro.Entity value) {
+    this.entities = value;
+  }
+
+  /**
    * Creates a new Tweet RecordBuilder.
    * @return A new Tweet RecordBuilder
    */
@@ -189,6 +210,8 @@ public class Tweet extends org.apache.avro.specific.SpecificRecordBase implement
     private java.lang.CharSequence text;
     /** Unix epoch time in seconds */
     private long timestamp;
+    private tech.chengqu.avro.Entity entities;
+    private tech.chengqu.avro.Entity.Builder entitiesBuilder;
 
     /** Creates a new Builder */
     private Builder() {
@@ -213,6 +236,13 @@ public class Tweet extends org.apache.avro.specific.SpecificRecordBase implement
         this.timestamp = data().deepCopy(fields()[2].schema(), other.timestamp);
         fieldSetFlags()[2] = true;
       }
+      if (isValidValue(fields()[3], other.entities)) {
+        this.entities = data().deepCopy(fields()[3].schema(), other.entities);
+        fieldSetFlags()[3] = true;
+      }
+      if (other.hasEntitiesBuilder()) {
+        this.entitiesBuilder = tech.chengqu.avro.Entity.newBuilder(other.getEntitiesBuilder());
+      }
     }
 
     /**
@@ -233,6 +263,11 @@ public class Tweet extends org.apache.avro.specific.SpecificRecordBase implement
         this.timestamp = data().deepCopy(fields()[2].schema(), other.timestamp);
         fieldSetFlags()[2] = true;
       }
+      if (isValidValue(fields()[3], other.entities)) {
+        this.entities = data().deepCopy(fields()[3].schema(), other.entities);
+        fieldSetFlags()[3] = true;
+      }
+      this.entitiesBuilder = null;
     }
 
     /**
@@ -363,6 +398,80 @@ public class Tweet extends org.apache.avro.specific.SpecificRecordBase implement
       return this;
     }
 
+    /**
+      * Gets the value of the 'entities' field.
+      * @return The value.
+      */
+    public tech.chengqu.avro.Entity getEntities() {
+      return entities;
+    }
+
+    /**
+      * Sets the value of the 'entities' field.
+      * @param value The value of 'entities'.
+      * @return This builder.
+      */
+    public tech.chengqu.avro.Tweet.Builder setEntities(tech.chengqu.avro.Entity value) {
+      validate(fields()[3], value);
+      this.entitiesBuilder = null;
+      this.entities = value;
+      fieldSetFlags()[3] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'entities' field has been set.
+      * @return True if the 'entities' field has been set, false otherwise.
+      */
+    public boolean hasEntities() {
+      return fieldSetFlags()[3];
+    }
+
+    /**
+     * Gets the Builder instance for the 'entities' field and creates one if it doesn't exist yet.
+     * @return This builder.
+     */
+    public tech.chengqu.avro.Entity.Builder getEntitiesBuilder() {
+      if (entitiesBuilder == null) {
+        if (hasEntities()) {
+          setEntitiesBuilder(tech.chengqu.avro.Entity.newBuilder(entities));
+        } else {
+          setEntitiesBuilder(tech.chengqu.avro.Entity.newBuilder());
+        }
+      }
+      return entitiesBuilder;
+    }
+
+    /**
+     * Sets the Builder instance for the 'entities' field
+     * @param value The builder instance that must be set.
+     * @return This builder.
+     */
+    public tech.chengqu.avro.Tweet.Builder setEntitiesBuilder(tech.chengqu.avro.Entity.Builder value) {
+      clearEntities();
+      entitiesBuilder = value;
+      return this;
+    }
+
+    /**
+     * Checks whether the 'entities' field has an active Builder instance
+     * @return True if the 'entities' field has an active Builder instance
+     */
+    public boolean hasEntitiesBuilder() {
+      return entitiesBuilder != null;
+    }
+
+    /**
+      * Clears the value of the 'entities' field.
+      * @return This builder.
+      */
+    public tech.chengqu.avro.Tweet.Builder clearEntities() {
+      entities = null;
+      entitiesBuilder = null;
+      fieldSetFlags()[3] = false;
+      return this;
+    }
+
     @Override
     @SuppressWarnings("unchecked")
     public Tweet build() {
@@ -371,6 +480,11 @@ public class Tweet extends org.apache.avro.specific.SpecificRecordBase implement
         record.username = fieldSetFlags()[0] ? this.username : (java.lang.CharSequence) defaultValue(fields()[0]);
         record.text = fieldSetFlags()[1] ? this.text : (java.lang.CharSequence) defaultValue(fields()[1]);
         record.timestamp = fieldSetFlags()[2] ? this.timestamp : (java.lang.Long) defaultValue(fields()[2]);
+        if (entitiesBuilder != null) {
+          record.entities = this.entitiesBuilder.build();
+        } else {
+          record.entities = fieldSetFlags()[3] ? this.entities : (tech.chengqu.avro.Entity) defaultValue(fields()[3]);
+        }
         return record;
       } catch (java.lang.Exception e) {
         throw new org.apache.avro.AvroRuntimeException(e);

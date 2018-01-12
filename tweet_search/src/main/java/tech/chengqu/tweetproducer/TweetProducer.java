@@ -13,6 +13,8 @@ import com.twitter.bijection.Injection;
 import com.twitter.bijection.avro.GenericAvroCodecs;
 
 import tech.chengqu.avro.AvroSerializer;
+import tech.chengqu.avro.Entity;
+import tech.chengqu.avro.Hashtag;
 import tech.chengqu.avro.Tweet;
 import tech.chengqu.kafka.KafkaConfig;
 
@@ -49,9 +51,12 @@ public class TweetProducer implements Runnable{
 		StatusListener listener = new StatusListener(){
             public void onStatus(Status status) {
             	Tweet tweet = new Tweet();
+            	Entity entity = new Entity();
             	tweet.setUsername(status.getUser().getName());
             	tweet.setText(status.getText());
             	tweet.setTimestamp(status.getCreatedAt().getTime());
+            	entity.setHashtags(tweet.getEntities().getHashtags());
+            	tweet.setEntities(entity);
             	ProducerRecord<String, Tweet> record = new ProducerRecord<>(topic, tweet);
             	producer.send(record);
                 try {
