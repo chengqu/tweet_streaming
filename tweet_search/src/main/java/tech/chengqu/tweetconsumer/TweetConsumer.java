@@ -30,14 +30,14 @@ public class TweetConsumer implements Runnable{
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		while(true) {
-			tp.setSpout("kafka_spout", new KafkaSpout<>(KafkaSpoutConfig.builder(kafkaConfig.host, kafkaConfig.topic).setKey(StringDeserializer.class).setValue(AvroDeserializer.class).build()), 1);
+		//while(true) {
+			tp.setSpout("kafka_storm_spout", new KafkaSpout<>(KafkaSpoutConfig.builder(kafkaConfig.host, kafkaConfig.topic).setKey(StringDeserializer.class).setValue(AvroDeserializer.class).build()), 1);
 			tp.setBolt("twitter_bolt", new HashtagReaderBolt()).shuffleGrouping("twitter_spout");
 			/*ConsumerRecords<String, Tweet> records = consumer.poll(1000);
 			for(ConsumerRecord<String,Tweet> record : records) {
 				System.out.printf("offset = %d, topic = %s, value = %s \n", record.offset(), record.topic(), record.value());
 			}
 			*/
-		}
+		//}
 	}
 }

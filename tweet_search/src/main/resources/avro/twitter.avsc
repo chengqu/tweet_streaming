@@ -14,7 +14,13 @@
     "name": "timestamp",
     "type": "long",
     "doc": "Unix epoch time in seconds"
-  }, {
+  },{
+  	"name": "screenname",
+  	"type": "string"
+  },{
+  	"name": "statusid",
+  	"type": "long"
+  },{
     "name": "entities",
     "type": {
     "type": "record",
@@ -27,7 +33,9 @@
           "name": "Hashtag",
           "type": "record",
           "fields": [
-            {"name" : "indices", "type" : "int"},
+            {"name": "indices", "type" : {
+            		"type" : "array", "items" : "int"
+            }},
             {"name" : "text", "type" : "string"}
           ]
         }

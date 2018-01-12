@@ -1,5 +1,6 @@
 package tech.chengqu.tweetproducer;
 
+import twitter4j.HashtagEntity;
 import twitter4j.StallWarning;
 import twitter4j.Status;
 import twitter4j.StatusDeletionNotice;
@@ -27,6 +28,9 @@ import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 
 import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Properties;
 public class TweetProducer implements Runnable{
 	String topic;
@@ -52,12 +56,24 @@ public class TweetProducer implements Runnable{
             public void onStatus(Status status) {
             	Tweet tweet = new Tweet();
             	Entity entity = new Entity();
+            	List<Hashtag> list = new ArrayList<Hashtag>();
+            	for(HashtagEntity ht : status.getHashtagEntities()) {
+            		Hashtag hashtag = new Hashtag();
+            		List<Integer> indices = new ArrayList<Integer>();
+            		indices.add(ht.getStart());
+            		indices.add(ht.getEnd());
+            		hashtag.setIndices(indices);
+            		hashtag.setText(ht.getText());
+            		list.add(hashtag);
+            	}
             	tweet.setUsername(status.getUser().getName());
             	tweet.setText(status.getText());
             	tweet.setTimestamp(status.getCreatedAt().getTime());
-            	entity.setHashtags(tweet.getEntities().getHashtags());
+            	entity.setHashtags(list);
             	tweet.setEntities(entity);
-            	ProducerRecord<String, Tweet> record = new ProducerRecord<>(topic, tweet);
+            	tweet.setScreenname(status.getUser().getScreenName());
+            	tweet.setStatusid(status.getId());
+            	ProducerRecord<String, Tweet> record = new ProducerRecord<>(topic,topic,tweet);
             	producer.send(record);
                 try {
 					Thread.sleep(250);
