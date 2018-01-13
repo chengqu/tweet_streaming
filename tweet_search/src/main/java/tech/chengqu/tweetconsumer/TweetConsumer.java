@@ -22,6 +22,7 @@ public class TweetConsumer implements Runnable{
 	private String[] keywords;
 	private String topic;
 	TopologyBuilder tp;
+	Config config;
 	public TweetConsumer(String[] keywords, String broker) {
 		this.keywords = keywords;
 		this.topic = String.join("_", keywords).replaceAll(" ", "-");
@@ -33,17 +34,18 @@ public class TweetConsumer implements Runnable{
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		while(true) {
+		/*while(true) {
 			ConsumerRecords<String, Tweet> records = consumer.poll(1000);
 			for(ConsumerRecord<String,Tweet> record : records) {
 				System.out.printf("offset = %d, topic = %s, value = %s \n", record.offset(), record.topic(), record.value());
 			}
 			
-		}
+		}*/
 		
-			/*Config config = new Config();
-			config.setDebug(true);
-			tp.setSpout("twitter-spout", new KafkaSpout<String, Tweet>(KafkaSpoutConfig.builder(kafkaConfig.host, kafkaConfig.topic).setGroupId(kafkaConfig.groupID).setKey(StringDeserializer.class).setValue(AvroDeserializer.class).build()), 1);
+			Config config = new Config();
+			//config.setDebug(true);
+			tp.setSpout("twitter-spout", new KafkaSpout<>(KafkaSpoutConfig.builder(kafkaConfig.host, kafkaConfig.topic).setFirstPollOffsetStrategy(KafkaSpoutConfig.FirstPollOffsetStrategy.UNCOMMITTED_EARLIEST)
+					.setGroupId(kafkaConfig.groupID).setKey(StringDeserializer.class).setValue(AvroDeserializer.class).build()), 1);
 			tp.setBolt("twitter-hashtag-reader-bolt", new HashtagReaderBolt())
 	         .shuffleGrouping("twitter-spout");
 
@@ -58,7 +60,11 @@ public class TweetConsumer implements Runnable{
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}*/
+			}
+			cluster.shutdown();
+		
+			return;
+	     
 		
 	}
 }

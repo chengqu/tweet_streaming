@@ -15,7 +15,7 @@ import org.apache.avro.message.SchemaStore;
 @org.apache.avro.specific.AvroGenerated
 public class Tweet extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
   private static final long serialVersionUID = 18520345811474064L;
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Tweet\",\"namespace\":\"tech.chengqu.avro\",\"doc\":\"A basic schema for storing Twitter messages\",\"fields\":[{\"name\":\"username\",\"type\":\"string\",\"doc\":\"Name of the user account on Twitter.com\"},{\"name\":\"text\",\"type\":\"string\",\"doc\":\"The content of the user's Twitter message\"},{\"name\":\"timestamp\",\"type\":\"long\",\"doc\":\"Unix epoch time in seconds\"},{\"name\":\"screenname\",\"type\":\"string\"},{\"name\":\"statusid\",\"type\":\"long\"},{\"name\":\"entities\",\"type\":{\"type\":\"record\",\"name\":\"Entity\",\"fields\":[{\"name\":\"hashtags\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"Hashtag\",\"fields\":[{\"name\":\"indices\",\"type\":{\"type\":\"array\",\"items\":\"int\"}},{\"name\":\"text\",\"type\":\"string\"}]}}}]}}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Tweet\",\"namespace\":\"tech.chengqu.avro\",\"doc\":\"A basic schema for storing Twitter messages\",\"fields\":[{\"name\":\"username\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"doc\":\"Name of the user account on Twitter.com\"},{\"name\":\"text\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"doc\":\"The content of the user's Twitter message\"},{\"name\":\"timestamp\",\"type\":\"long\",\"doc\":\"Unix epoch time in seconds\"},{\"name\":\"screenname\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"statusid\",\"type\":\"long\"},{\"name\":\"entities\",\"type\":{\"type\":\"record\",\"name\":\"Entity\",\"fields\":[{\"name\":\"hashtags\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"Hashtag\",\"fields\":[{\"name\":\"indices\",\"type\":{\"type\":\"array\",\"items\":\"int\"}},{\"name\":\"text\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}]}}}]}}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static SpecificData MODEL$ = new SpecificData();
@@ -53,12 +53,12 @@ public class Tweet extends org.apache.avro.specific.SpecificRecordBase implement
   }
 
   /** Name of the user account on Twitter.com */
-  @Deprecated public java.lang.CharSequence username;
+  @Deprecated public java.lang.String username;
   /** The content of the user's Twitter message */
-  @Deprecated public java.lang.CharSequence text;
+  @Deprecated public java.lang.String text;
   /** Unix epoch time in seconds */
   @Deprecated public long timestamp;
-  @Deprecated public java.lang.CharSequence screenname;
+  @Deprecated public java.lang.String screenname;
   @Deprecated public long statusid;
   @Deprecated public tech.chengqu.avro.Entity entities;
 
@@ -78,7 +78,7 @@ public class Tweet extends org.apache.avro.specific.SpecificRecordBase implement
    * @param statusid The new value for statusid
    * @param entities The new value for entities
    */
-  public Tweet(java.lang.CharSequence username, java.lang.CharSequence text, java.lang.Long timestamp, java.lang.CharSequence screenname, java.lang.Long statusid, tech.chengqu.avro.Entity entities) {
+  public Tweet(java.lang.String username, java.lang.String text, java.lang.Long timestamp, java.lang.String screenname, java.lang.Long statusid, tech.chengqu.avro.Entity entities) {
     this.username = username;
     this.text = text;
     this.timestamp = timestamp;
@@ -105,10 +105,10 @@ public class Tweet extends org.apache.avro.specific.SpecificRecordBase implement
   @SuppressWarnings(value="unchecked")
   public void put(int field$, java.lang.Object value$) {
     switch (field$) {
-    case 0: username = (java.lang.CharSequence)value$; break;
-    case 1: text = (java.lang.CharSequence)value$; break;
+    case 0: username = (java.lang.String)value$; break;
+    case 1: text = (java.lang.String)value$; break;
     case 2: timestamp = (java.lang.Long)value$; break;
-    case 3: screenname = (java.lang.CharSequence)value$; break;
+    case 3: screenname = (java.lang.String)value$; break;
     case 4: statusid = (java.lang.Long)value$; break;
     case 5: entities = (tech.chengqu.avro.Entity)value$; break;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
@@ -119,7 +119,7 @@ public class Tweet extends org.apache.avro.specific.SpecificRecordBase implement
    * Gets the value of the 'username' field.
    * @return Name of the user account on Twitter.com
    */
-  public java.lang.CharSequence getUsername() {
+  public java.lang.String getUsername() {
     return username;
   }
 
@@ -128,7 +128,7 @@ public class Tweet extends org.apache.avro.specific.SpecificRecordBase implement
    * Name of the user account on Twitter.com
    * @param value the value to set.
    */
-  public void setUsername(java.lang.CharSequence value) {
+  public void setUsername(java.lang.String value) {
     this.username = value;
   }
 
@@ -136,7 +136,7 @@ public class Tweet extends org.apache.avro.specific.SpecificRecordBase implement
    * Gets the value of the 'text' field.
    * @return The content of the user's Twitter message
    */
-  public java.lang.CharSequence getText() {
+  public java.lang.String getText() {
     return text;
   }
 
@@ -145,7 +145,7 @@ public class Tweet extends org.apache.avro.specific.SpecificRecordBase implement
    * The content of the user's Twitter message
    * @param value the value to set.
    */
-  public void setText(java.lang.CharSequence value) {
+  public void setText(java.lang.String value) {
     this.text = value;
   }
 
@@ -170,7 +170,7 @@ public class Tweet extends org.apache.avro.specific.SpecificRecordBase implement
    * Gets the value of the 'screenname' field.
    * @return The value of the 'screenname' field.
    */
-  public java.lang.CharSequence getScreenname() {
+  public java.lang.String getScreenname() {
     return screenname;
   }
 
@@ -178,7 +178,7 @@ public class Tweet extends org.apache.avro.specific.SpecificRecordBase implement
    * Sets the value of the 'screenname' field.
    * @param value the value to set.
    */
-  public void setScreenname(java.lang.CharSequence value) {
+  public void setScreenname(java.lang.String value) {
     this.screenname = value;
   }
 
@@ -247,12 +247,12 @@ public class Tweet extends org.apache.avro.specific.SpecificRecordBase implement
     implements org.apache.avro.data.RecordBuilder<Tweet> {
 
     /** Name of the user account on Twitter.com */
-    private java.lang.CharSequence username;
+    private java.lang.String username;
     /** The content of the user's Twitter message */
-    private java.lang.CharSequence text;
+    private java.lang.String text;
     /** Unix epoch time in seconds */
     private long timestamp;
-    private java.lang.CharSequence screenname;
+    private java.lang.String screenname;
     private long statusid;
     private tech.chengqu.avro.Entity entities;
     private tech.chengqu.avro.Entity.Builder entitiesBuilder;
@@ -335,7 +335,7 @@ public class Tweet extends org.apache.avro.specific.SpecificRecordBase implement
       * Name of the user account on Twitter.com
       * @return The value.
       */
-    public java.lang.CharSequence getUsername() {
+    public java.lang.String getUsername() {
       return username;
     }
 
@@ -345,7 +345,7 @@ public class Tweet extends org.apache.avro.specific.SpecificRecordBase implement
       * @param value The value of 'username'.
       * @return This builder.
       */
-    public tech.chengqu.avro.Tweet.Builder setUsername(java.lang.CharSequence value) {
+    public tech.chengqu.avro.Tweet.Builder setUsername(java.lang.String value) {
       validate(fields()[0], value);
       this.username = value;
       fieldSetFlags()[0] = true;
@@ -378,7 +378,7 @@ public class Tweet extends org.apache.avro.specific.SpecificRecordBase implement
       * The content of the user's Twitter message
       * @return The value.
       */
-    public java.lang.CharSequence getText() {
+    public java.lang.String getText() {
       return text;
     }
 
@@ -388,7 +388,7 @@ public class Tweet extends org.apache.avro.specific.SpecificRecordBase implement
       * @param value The value of 'text'.
       * @return This builder.
       */
-    public tech.chengqu.avro.Tweet.Builder setText(java.lang.CharSequence value) {
+    public tech.chengqu.avro.Tweet.Builder setText(java.lang.String value) {
       validate(fields()[1], value);
       this.text = value;
       fieldSetFlags()[1] = true;
@@ -462,7 +462,7 @@ public class Tweet extends org.apache.avro.specific.SpecificRecordBase implement
       * Gets the value of the 'screenname' field.
       * @return The value.
       */
-    public java.lang.CharSequence getScreenname() {
+    public java.lang.String getScreenname() {
       return screenname;
     }
 
@@ -471,7 +471,7 @@ public class Tweet extends org.apache.avro.specific.SpecificRecordBase implement
       * @param value The value of 'screenname'.
       * @return This builder.
       */
-    public tech.chengqu.avro.Tweet.Builder setScreenname(java.lang.CharSequence value) {
+    public tech.chengqu.avro.Tweet.Builder setScreenname(java.lang.String value) {
       validate(fields()[3], value);
       this.screenname = value;
       fieldSetFlags()[3] = true;
@@ -614,10 +614,10 @@ public class Tweet extends org.apache.avro.specific.SpecificRecordBase implement
     public Tweet build() {
       try {
         Tweet record = new Tweet();
-        record.username = fieldSetFlags()[0] ? this.username : (java.lang.CharSequence) defaultValue(fields()[0]);
-        record.text = fieldSetFlags()[1] ? this.text : (java.lang.CharSequence) defaultValue(fields()[1]);
+        record.username = fieldSetFlags()[0] ? this.username : (java.lang.String) defaultValue(fields()[0]);
+        record.text = fieldSetFlags()[1] ? this.text : (java.lang.String) defaultValue(fields()[1]);
         record.timestamp = fieldSetFlags()[2] ? this.timestamp : (java.lang.Long) defaultValue(fields()[2]);
-        record.screenname = fieldSetFlags()[3] ? this.screenname : (java.lang.CharSequence) defaultValue(fields()[3]);
+        record.screenname = fieldSetFlags()[3] ? this.screenname : (java.lang.String) defaultValue(fields()[3]);
         record.statusid = fieldSetFlags()[4] ? this.statusid : (java.lang.Long) defaultValue(fields()[4]);
         if (entitiesBuilder != null) {
           record.entities = this.entitiesBuilder.build();

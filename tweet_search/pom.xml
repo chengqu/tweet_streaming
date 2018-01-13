@@ -61,6 +61,13 @@
 			<plugin>
 				<groupId>org.apache.avro</groupId>
 				<artifactId>avro-maven-plugin</artifactId>
+				<configuration>
+
+					<!-- Avro string compiled to java.lang.String instead of CharSequence -->
+
+					<stringType>String</stringType>
+
+				</configuration>
 				<version>1.8.2</version>
 				<executions>
 					<execution>

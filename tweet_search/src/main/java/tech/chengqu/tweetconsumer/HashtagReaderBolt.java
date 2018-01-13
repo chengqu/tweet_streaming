@@ -27,7 +27,6 @@ public class HashtagReaderBolt implements IRichBolt {
 
    @Override
    public void execute(Tuple tuple) {
-	   System.out.println(tuple.getValueByField("value").toString());
       Tweet tweet = (Tweet) tuple.getValueByField("value");
       
       for(Hashtag ht : tweet.getEntities().getHashtags()) {

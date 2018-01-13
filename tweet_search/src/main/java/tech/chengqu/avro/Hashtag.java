@@ -14,7 +14,7 @@ import org.apache.avro.message.SchemaStore;
 @org.apache.avro.specific.AvroGenerated
 public class Hashtag extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
   private static final long serialVersionUID = -2490825197124515608L;
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Hashtag\",\"namespace\":\"tech.chengqu.avro\",\"fields\":[{\"name\":\"indices\",\"type\":{\"type\":\"array\",\"items\":\"int\"}},{\"name\":\"text\",\"type\":\"string\"}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Hashtag\",\"namespace\":\"tech.chengqu.avro\",\"fields\":[{\"name\":\"indices\",\"type\":{\"type\":\"array\",\"items\":\"int\"}},{\"name\":\"text\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static SpecificData MODEL$ = new SpecificData();
@@ -52,7 +52,7 @@ public class Hashtag extends org.apache.avro.specific.SpecificRecordBase impleme
   }
 
   @Deprecated public java.util.List<java.lang.Integer> indices;
-  @Deprecated public java.lang.CharSequence text;
+  @Deprecated public java.lang.String text;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -66,7 +66,7 @@ public class Hashtag extends org.apache.avro.specific.SpecificRecordBase impleme
    * @param indices The new value for indices
    * @param text The new value for text
    */
-  public Hashtag(java.util.List<java.lang.Integer> indices, java.lang.CharSequence text) {
+  public Hashtag(java.util.List<java.lang.Integer> indices, java.lang.String text) {
     this.indices = indices;
     this.text = text;
   }
@@ -86,7 +86,7 @@ public class Hashtag extends org.apache.avro.specific.SpecificRecordBase impleme
   public void put(int field$, java.lang.Object value$) {
     switch (field$) {
     case 0: indices = (java.util.List<java.lang.Integer>)value$; break;
-    case 1: text = (java.lang.CharSequence)value$; break;
+    case 1: text = (java.lang.String)value$; break;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -111,7 +111,7 @@ public class Hashtag extends org.apache.avro.specific.SpecificRecordBase impleme
    * Gets the value of the 'text' field.
    * @return The value of the 'text' field.
    */
-  public java.lang.CharSequence getText() {
+  public java.lang.String getText() {
     return text;
   }
 
@@ -119,7 +119,7 @@ public class Hashtag extends org.apache.avro.specific.SpecificRecordBase impleme
    * Sets the value of the 'text' field.
    * @param value the value to set.
    */
-  public void setText(java.lang.CharSequence value) {
+  public void setText(java.lang.String value) {
     this.text = value;
   }
 
@@ -156,7 +156,7 @@ public class Hashtag extends org.apache.avro.specific.SpecificRecordBase impleme
     implements org.apache.avro.data.RecordBuilder<Hashtag> {
 
     private java.util.List<java.lang.Integer> indices;
-    private java.lang.CharSequence text;
+    private java.lang.String text;
 
     /** Creates a new Builder */
     private Builder() {
@@ -238,7 +238,7 @@ public class Hashtag extends org.apache.avro.specific.SpecificRecordBase impleme
       * Gets the value of the 'text' field.
       * @return The value.
       */
-    public java.lang.CharSequence getText() {
+    public java.lang.String getText() {
       return text;
     }
 
@@ -247,7 +247,7 @@ public class Hashtag extends org.apache.avro.specific.SpecificRecordBase impleme
       * @param value The value of 'text'.
       * @return This builder.
       */
-    public tech.chengqu.avro.Hashtag.Builder setText(java.lang.CharSequence value) {
+    public tech.chengqu.avro.Hashtag.Builder setText(java.lang.String value) {
       validate(fields()[1], value);
       this.text = value;
       fieldSetFlags()[1] = true;
@@ -279,7 +279,7 @@ public class Hashtag extends org.apache.avro.specific.SpecificRecordBase impleme
       try {
         Hashtag record = new Hashtag();
         record.indices = fieldSetFlags()[0] ? this.indices : (java.util.List<java.lang.Integer>) defaultValue(fields()[0]);
-        record.text = fieldSetFlags()[1] ? this.text : (java.lang.CharSequence) defaultValue(fields()[1]);
+        record.text = fieldSetFlags()[1] ? this.text : (java.lang.String) defaultValue(fields()[1]);
         return record;
       } catch (java.lang.Exception e) {
         throw new org.apache.avro.AvroRuntimeException(e);

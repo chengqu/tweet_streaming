@@ -40,7 +40,7 @@ public class TweetProducer implements Runnable{
 	TwitterStream twitterStream;
 	KafkaConfig kafkaConfig;
 	KafkaProducer<String, Tweet> producer;
-	
+
 	public TweetProducer(String[] keywords, String server){
 		this.keywords = keywords;
 		this.topic = String.join("_", keywords).replaceAll(" ", "-");
@@ -53,54 +53,64 @@ public class TweetProducer implements Runnable{
 	public void run() {
 		// TODO Auto-generated method stub
 		StatusListener listener = new StatusListener(){
-            public void onStatus(Status status) {
-            	Tweet tweet = new Tweet();
-            	Entity entity = new Entity();
-            	List<Hashtag> list = new ArrayList<Hashtag>();
-            	for(HashtagEntity ht : status.getHashtagEntities()) {
-            		Hashtag hashtag = new Hashtag();
-            		List<Integer> indices = new ArrayList<Integer>();
-            		indices.add(ht.getStart());
-            		indices.add(ht.getEnd());
-            		hashtag.setIndices(indices);
-            		hashtag.setText(ht.getText());
-            		list.add(hashtag);
-            	}
-            	tweet.setUsername(status.getUser().getName());
-            	tweet.setText(status.getText());
-            	tweet.setTimestamp(status.getCreatedAt().getTime());
-            	entity.setHashtags(list);
-            	tweet.setEntities(entity);
-            	tweet.setScreenname(status.getUser().getScreenName());
-            	tweet.setStatusid(status.getId());
-            	ProducerRecord<String, Tweet> record = new ProducerRecord<>(topic,topic,tweet);
-            	producer.send(record);
-                try {
-					Thread.sleep(250);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+			public void onStatus(Status status) {
+				Tweet tweet = new Tweet();
+				Entity entity = new Entity();
+				List<Hashtag> list = new ArrayList<Hashtag>();
+				if(status.getHashtagEntities().length > 0) {
+					for(HashtagEntity ht : status.getHashtagEntities()) {
+						Hashtag hashtag = new Hashtag();
+						List<Integer> indices = new ArrayList<Integer>();
+						indices.add(ht.getStart());
+						indices.add(ht.getEnd());
+						hashtag.setIndices(indices);
+						hashtag.setText(ht.getText());
+						list.add(hashtag);
+					}
+					tweet.setUsername(status.getUser().getName());
+					tweet.setText(status.getText());
+					tweet.setTimestamp(status.getCreatedAt().getTime());
+					entity.setHashtags(list);
+					tweet.setEntities(entity);
+					tweet.setScreenname(status.getUser().getScreenName());
+					tweet.setStatusid(status.getId());
+					ProducerRecord<String, Tweet> record = new ProducerRecord<>(topic,topic,tweet);
+					producer.send(record);
+					try {
+						Thread.sleep(250);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 
-                //System.out.println(status.getUser().getName() + " : " + status.getText()+ "  Tweeted AT: " + status.getCreatedAt());
-            }
-            public void onDeletionNotice(StatusDeletionNotice statusDeletionNotice) {}
-            public void onTrackLimitationNotice(int numberOfLimitedStatuses) {}
-            public void onException(Exception ex) {
-                ex.printStackTrace();
-            }
-            @Override
-            public void onScrubGeo(long arg0, long arg1) {
-                // TODO Auto-generated method stub
-                
-            }
-            @Override
-            public void onStallWarning(StallWarning arg0) {
-                // TODO Auto-generated method stub
-                
-            }            
-        };
+					//System.out.println(status.getUser().getName() + " : " + status.getText()+ "  Tweeted AT: " + status.getCreatedAt());
+				}
+			}
+			public void onDeletionNotice(StatusDeletionNotice statusDeletionNotice) {}
+			public void onTrackLimitationNotice(int numberOfLimitedStatuses) {}
+			public void onException(Exception ex) {
+				ex.printStackTrace();
+			}
+			@Override
+			public void onScrubGeo(long arg0, long arg1) {
+				// TODO Auto-generated method stub
+
+			}
+			@Override
+			public void onStallWarning(StallWarning arg0) {
+				// TODO Auto-generated method stub
+
+			}            
+		};
 		twitterStream = con.getStreamByName(keywords,listener);
-		//producer.close();
+		try {
+			Thread.sleep(100000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		twitterStream.shutdown();
+		producer.close();
+		return;
 	}
 }
