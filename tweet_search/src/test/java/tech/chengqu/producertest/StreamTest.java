@@ -18,11 +18,5 @@ public class StreamTest {
 	    Thread t2 = new Thread(consumerThread);
 	    t2.start();
 	 
-	    try {
-	      Thread.sleep(100000);
-	    } catch (InterruptedException ie) {
-	 
-	    }
-	    
 	}
 }

@@ -57,7 +57,6 @@ public class TweetProducer implements Runnable{
 				Tweet tweet = new Tweet();
 				Entity entity = new Entity();
 				List<Hashtag> list = new ArrayList<Hashtag>();
-				if(status.getHashtagEntities().length > 0) {
 					for(HashtagEntity ht : status.getHashtagEntities()) {
 						Hashtag hashtag = new Hashtag();
 						List<Integer> indices = new ArrayList<Integer>();
@@ -82,9 +81,6 @@ public class TweetProducer implements Runnable{
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-
-					//System.out.println(status.getUser().getName() + " : " + status.getText()+ "  Tweeted AT: " + status.getCreatedAt());
-				}
 			}
 			public void onDeletionNotice(StatusDeletionNotice statusDeletionNotice) {}
 			public void onTrackLimitationNotice(int numberOfLimitedStatuses) {}
@@ -109,7 +105,14 @@ public class TweetProducer implements Runnable{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		twitterStream.removeListener(listener);
 		twitterStream.shutdown();
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		producer.close();
 		return;
 	}

@@ -34,13 +34,6 @@ public class TweetConsumer implements Runnable{
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		/*while(true) {
-			ConsumerRecords<String, Tweet> records = consumer.poll(1000);
-			for(ConsumerRecord<String,Tweet> record : records) {
-				System.out.printf("offset = %d, topic = %s, value = %s \n", record.offset(), record.topic(), record.value());
-			}
-			
-		}*/
 		
 			Config config = new Config();
 			//config.setDebug(true);
@@ -66,5 +59,15 @@ public class TweetConsumer implements Runnable{
 			return;
 	     
 		
+	}
+	
+	public void flush() {
+		while(true) {
+		ConsumerRecords<String, Tweet> records = consumer.poll(1000);
+		for(ConsumerRecord<String,Tweet> record : records) {
+			System.out.printf("offset = %d, topic = %s, value = %s \n", record.offset(), record.topic(), record.value());
+		}
+		
+	}
 	}
 }
