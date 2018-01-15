@@ -27,7 +27,7 @@ public class Topologies {
 	    String counterId = "counter";
 	    String intermediateRankerId = "intermediateRanker";
 	    String totalRankerId = "finalRanker";
-	    tp.setSpout(spoutId, new KafkaSpout<>(kafkaConfig.kafkaSpoutConfig()), 1);
+	    tp.setSpout(spoutId, new KafkaSpout<>(kafkaConfig.kafkaSpoutConfig()), 5);
 		tp.setBolt(hashtagReaderId, new HashtagReaderBolt())
         .shuffleGrouping(spoutId);
 

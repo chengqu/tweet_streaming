@@ -48,15 +48,15 @@ public class TweetConsumer implements Runnable{
 			LocalCluster cluster = new LocalCluster();
 			cluster.submitTopology("TwitterHashtagStorm", config,
 	        rollingTopHashtagTP.createTopology());
-			try {
-				Thread.sleep(10000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			cluster.shutdown();
-			return;
-	     
+//			try {
+//				Thread.sleep(10000);
+//			} catch (InterruptedException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//			cluster.shutdown();
+//			return;
+//	     
 		
 	}
 	

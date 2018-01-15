@@ -93,22 +93,23 @@ public class TweetProducer implements Runnable{
 			}            
 		};
 		twitterStream = con.getStreamByName(keywords,listener);
-		try {
-			Thread.sleep(10000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		twitterStream.removeListener(listener);
-		twitterStream.shutdown();
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		producer.flush();
-		producer.close();
-		return;
+		
+//		try {
+//			Thread.sleep(10000);
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		twitterStream.removeListener(listener);
+//		twitterStream.shutdown();
+//		try {
+//			Thread.sleep(1000);
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		producer.flush();
+//		producer.close();
+//		return;
 	}
 }
