@@ -17,7 +17,7 @@ import org.apache.storm.tuple.Values;
 import org.apache.storm.utils.Utils;
 
 import tech.chengqu.avro.Tweet;
-import tech.chengqu.kafka.KafkaConfig;
+import tech.chengqu.config.KafkaConfig;
 
 @SuppressWarnings("serial")
 public class TwitterSpout extends BaseRichSpout {

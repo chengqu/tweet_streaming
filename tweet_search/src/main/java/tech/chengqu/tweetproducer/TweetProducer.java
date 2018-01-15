@@ -17,7 +17,7 @@ import tech.chengqu.avro.AvroSerializer;
 import tech.chengqu.avro.Entity;
 import tech.chengqu.avro.Hashtag;
 import tech.chengqu.avro.Tweet;
-import tech.chengqu.kafka.KafkaConfig;
+import tech.chengqu.config.KafkaConfig;
 
 import org.apache.avro.Schema;
 import org.apache.avro.generic.GenericData;
@@ -75,12 +75,6 @@ public class TweetProducer implements Runnable{
 					tweet.setStatusid(status.getId());
 					ProducerRecord<String, Tweet> record = new ProducerRecord<>(topic,topic,tweet);
 					producer.send(record);
-					try {
-						Thread.sleep(250);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
 			}
 			public void onDeletionNotice(StatusDeletionNotice statusDeletionNotice) {}
 			public void onTrackLimitationNotice(int numberOfLimitedStatuses) {}
@@ -100,7 +94,7 @@ public class TweetProducer implements Runnable{
 		};
 		twitterStream = con.getStreamByName(keywords,listener);
 		try {
-			Thread.sleep(100000);
+			Thread.sleep(10000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -113,6 +107,7 @@ public class TweetProducer implements Runnable{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		producer.flush();
 		producer.close();
 		return;
 	}
