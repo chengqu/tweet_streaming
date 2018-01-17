@@ -10,9 +10,6 @@ import twitter4j.TwitterFactory;
 import twitter4j.TwitterStream;
 import twitter4j.TwitterStreamFactory;
 
-import com.twitter.bijection.Injection;
-import com.twitter.bijection.avro.GenericAvroCodecs;
-
 import tech.chengqu.avro.AvroSerializer;
 import tech.chengqu.avro.Entity;
 import tech.chengqu.avro.Hashtag;
